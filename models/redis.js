@@ -364,10 +364,12 @@ var getProgressForKeys = function(keys){
     var multi = [];
     for(var i = 0, ii = keys.length; i < ii; i++){
         multi.push(["hget", "bull:"+keys[i].type+":"+keys[i].id, "progress"]);
+        multi.push(["hget", "bull:"+keys[i].type+":"+keys[i].id, "timestamp"]);
     }
     redis.multi(multi).exec(function(err, results){
-        for(var i = 0, ii = keys.length; i < ii; i++){
+        for(var i = 0, ii = keys.length; i < ii; i = i + 2){
             keys[i].progress = results[i];
+            keys[i].timestamp = results[i + 1]
         }
         dfd.resolve(keys);
     });
