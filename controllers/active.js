@@ -26,12 +26,14 @@ module.exports = function (app) {
 
     app.get('/active', ensureAuthenticated, function (req, res) {
         requestActive(req, res).done(function(model){
+            model.user = req.user;
             res.render('jobList', model);
         });
     });
 
     app.get('/api/active', ensureAuthenticated, function (req, res) {
         requestActive(req, res).done(function(model){
+            model.user = req.user;
             res.json(model);
         });
     });

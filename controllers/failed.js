@@ -24,12 +24,14 @@ module.exports = function (app) {
 
     app.get('/failed', ensureAuthenticated, function (req, res) {
         getFailedData(req, res).done(function(model){
+            model.user = req.user;
             res.render('jobList', model);
         });
     });
 
     app.get('/api/failed', ensureAuthenticated, function (req, res) {
         getFailedData(req, res).done(function(model){
+            model.user = req.user;
             res.json(model);
         });
     });

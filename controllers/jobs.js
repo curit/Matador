@@ -16,6 +16,7 @@ module.exports = function (app) {
         var id = req.param("id"),
             type = req.param("type");
         redisModel.makePendingById(type, id).done(function(results){
+            results.user = req.user;
             res.json(results);
         });
     });
@@ -23,6 +24,7 @@ module.exports = function (app) {
     app.get('/api/jobs/delete/status/:type', ensureAuthenticated, function (req, res) {
         var type = req.param("type");
         redisModel.deleteJobByStatus(type).done(function(results){
+            results.user = req.user;
             res.json(results);
         });
     });
@@ -31,6 +33,7 @@ module.exports = function (app) {
         var id = req.param("id"),
             type = req.param("type");
         redisModel.deleteJobById(type, id).done(function(results){
+            results.user = req.user;
             res.json(results);
         });
     });
@@ -39,6 +42,7 @@ module.exports = function (app) {
         var id = req.param("id"),
             type = req.param("type");
         redisModel.getDataById(type, id).done(function(results){
+            results.user = req.user;
             res.json(results);
         });
     });

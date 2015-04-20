@@ -33,7 +33,6 @@
 </head>
 
 <body>
-
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -53,6 +52,7 @@
                 <li {?active}class="active"{/active}><a href="{basepath}/active">Active<span data-bind="visible: active() != null, text: active"></span></a></li>
                 <li {?pending}class="active"{/pending}><a href="{basepath}/pending">Pending<span data-bind="visible: pending() != null, text: pending"></span></a></li>
                 <li {?queues}class="active"{/queues}><a href="{basepath}/pending">Queues<span data-bind="visible: queues() != null, text: queues"></span></a></li>
+                <li><a href="{?user}/logout{:else}/login{/user}">{?user}{user.displayName}{:else}Sign in{/user}</a></li>
             </ul>
         </div>
     </div>
@@ -69,6 +69,7 @@
                 <li {?active}class="active"{/active}><a href="{basepath}/active">Active<span data-bind="visible: active() != null, text: active"></span></a></li>
                 <li {?pending}class="active"{/pending}><a href="{basepath}/pending">Pending<span data-bind="visible: pending() != null, text: pending"></span></a></li>
                 <li {?queues}class="active"{/queues}><a href="{basepath}/queues">Queues<span data-bind="visible: queues() != null, text: queues"></span></a></li>
+                <li><a href="{?user}/logout{:else}/login{/user}">{?user}{user.displayName}{:else}Sign in{/user}</a></li>
             </ul>
         </div>
 

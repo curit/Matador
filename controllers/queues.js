@@ -20,12 +20,14 @@ module.exports = function (app) {
 
     app.get('/queues', ensureAuthenticated, function (req, res) {
         getQueuesModel(req, res).done(function(model){
+            model.user = req.user;
             res.render('queueList', model);
         });
     });
 
     app.get('/api/queues', ensureAuthenticated, function (req, res) {
         getQueuesModel(req, res).done(function(model){
+            model.user = req.user;
             res.json(model);
         });
     });

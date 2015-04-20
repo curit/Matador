@@ -24,13 +24,15 @@ module.exports = function (app) {
 
     app.get('/pending', ensureAuthenticated, function (req, res) {
         getPendingModel(req, res).done(function(model){
+            model.user = req.user;
             res.render('jobList', model);
         });
     });
 
     app.get('/api/pending', ensureAuthenticated, function (req, res) {
         getPendingModel(req, res).done(function(model){
-            res.json(model);
+            model.user = req.user;
+            req.json(model);
         });
     });
 };

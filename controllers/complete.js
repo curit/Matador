@@ -24,12 +24,14 @@ module.exports = function (app) {
 
     app.get('/complete', ensureAuthenticated, function (req, res) {
         requestComplete(req, res).done(function(model){
+            model.user = req.user;
             res.render('jobList', model);
         });
     });
 
     app.get('/api/complete', ensureAuthenticated, function (req, res) {
         requestComplete(req, res).done(function(model){
+            model.user = req.user;
             res.json(model);
         });
     });

@@ -30,12 +30,14 @@ module.exports = function (app) {
 
     app.get('/', ensureAuthenticated, function (req, res) {
         getOverviewData(req, res).done(function(model){
+            model.user = req.user;
             res.render('index', model);
         });
     });
 
     app.get('/api/', ensureAuthenticated, function (req, res) {
         getOverviewData(req, res).done(function(model){
+            model.user = req.user;
             res.json(model);
         });
     });
