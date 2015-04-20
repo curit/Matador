@@ -2,7 +2,8 @@
 
 
 var redisModel = require('../models/redis'),
-    q = require('q');
+    q = require('q'),
+    ensureAuthenticated = require('../lib/ensureAuthenticated.js');
 
 
 module.exports = function (app) {
@@ -21,13 +22,13 @@ module.exports = function (app) {
         return dfd.promise;
     };
 
-    app.get('/pending', function (req, res) {
+    app.get('/pending', ensureAuthenticated, function (req, res) {
         getPendingModel(req, res).done(function(model){
             res.render('jobList', model);
         });
     });
 
-    app.get('/api/pending', function (req, res) {
+    app.get('/api/pending', ensureAuthenticated, function (req, res) {
         getPendingModel(req, res).done(function(model){
             res.json(model);
         });

@@ -2,7 +2,8 @@
 var redisModel = require('../models/redis'),
     _ = require('lodash'),
     q = require('q'),
-    updateInfo = require('../lib/updateInfo.js');
+    updateInfo = require('../lib/updateInfo.js'),
+    ensureAuthenticated = require('../lib/ensureAuthenticated.js');
 
 module.exports = function (app) {
     var getOverviewData = function(req, res){
@@ -27,13 +28,13 @@ module.exports = function (app) {
         return dfd.promise;
     }
 
-    app.get('/', function (req, res) {
+    app.get('/', ensureAuthenticated, function (req, res) {
         getOverviewData(req, res).done(function(model){
             res.render('index', model);
         });
     });
 
-    app.get('/api/', function (req, res) {
+    app.get('/api/', ensureAuthenticated, function (req, res) {
         getOverviewData(req, res).done(function(model){
             res.json(model);
         });

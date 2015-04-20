@@ -2,7 +2,8 @@
 
 
 var redisModel = require('../models/redis'),
-    q = require('q');
+    q = require('q'),
+    ensureAuthenticated = require('../lib/ensureAuthenticated.js');
 
 
 module.exports = function (app) {
@@ -23,13 +24,13 @@ module.exports = function (app) {
         return dfd.promise;
     }
 
-    app.get('/active', function (req, res) {
+    app.get('/active', ensureAuthenticated, function (req, res) {
         requestActive(req, res).done(function(model){
             res.render('jobList', model);
         });
     });
 
-    app.get('/api/active', function (req, res) {
+    app.get('/api/active', ensureAuthenticated, function (req, res) {
         requestActive(req, res).done(function(model){
             res.json(model);
         });
