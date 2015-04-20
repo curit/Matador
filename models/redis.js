@@ -369,7 +369,7 @@ var getProgressForKeys = function(keys){
     redis.multi(multi).exec(function(err, results){
         for(var i = 0, ii = keys.length; i < ii; i = i + 2){
             keys[i].progress = results[i];
-            keys[i].timestamp = results[i + 1]
+            keys[i].timestamp = parseInt(results[i + 1], 10);
         }
         dfd.resolve(keys);
     });
