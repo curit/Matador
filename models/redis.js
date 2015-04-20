@@ -204,7 +204,7 @@ var formatKeys = function(keys){
                         else if(pendingJobs.keys[explodedKeys[1]] && pendingJobs.keys[explodedKeys[1]].indexOf(explodedKeys[2]) !== -1) status = "pending";
                         keyList.push({id: explodedKeys[2], type: explodedKeys[1], status: status});
                     }
-                    keyList = _.sortBy(keyList, function(key){return parseInt(key.id);});
+                    keyList = _.sortBy(keyList, function(key){return parseInt(key.id);}).reverse();
                     dfd.resolve(keyList);
                 });
             });
