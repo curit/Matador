@@ -2,7 +2,8 @@
 
 var _ = require("lodash"),
     Promise = require('bluebird'),
-    q = require('q');
+    q = require('q'),
+    moment = require('moment');
 
 var getActiveKeys = function(){
     var dfd = q.defer();
@@ -369,7 +370,7 @@ var getProgressForKeys = function(keys){
     redis.multi(multi).exec(function(err, results){
         for(var i = 0, ii = keys.length; i < ii; i = i + 2){
             keys[i].progress = results[i];
-            keys[i].timestamp = parseInt(results[i + 1], 10);
+            keys[i].timestamp = moment(new Date(parseInt(results[i + 1], 10))).fromNow();
         }
         dfd.resolve(keys);
     });

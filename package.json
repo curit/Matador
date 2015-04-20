@@ -14,6 +14,7 @@
     "express-session": "^1.11.1",
     "less": "~2.1.2",
     "lodash": "~2.4.1",
+    "moment": "^2.10.2",
     "passport": "^0.2.1",
     "passport-azure-ad": "0.0.5",
     "q": "~1.1.2",

@@ -27,6 +27,7 @@ module.exports = function (app) {
     app.get('/active', ensureAuthenticated, function (req, res) {
         requestActive(req, res).done(function(model){
             model.user = req.user;
+            console.log(model);
             res.render('jobList', model);
         });
     });
