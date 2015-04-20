@@ -368,9 +368,9 @@ var getProgressForKeys = function(keys){
         multi.push(["hget", "bull:"+keys[i].type+":"+keys[i].id, "timestamp"]);
     }
     redis.multi(multi).exec(function(err, results){
-        for(var i = 0, ii = keys.length; i < ii; i = i + 2){
-            keys[i].progress = results[i];
-            keys[i].timestamp = moment(new Date(parseInt(results[i + 1], 10))).fromNow();
+        for(var i = 0, ii = keys.length; i < ii; i++){
+            keys[i].progress = results[(i * 2)];
+            keys[i].timestamp = moment(new Date(parseInt(results[(i * 2) + 1], 10))).fromNow();
         }
         dfd.resolve(keys);
     });

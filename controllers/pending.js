@@ -11,11 +11,13 @@ module.exports = function (app) {
         var dfd = q.defer();
         redisModel.getStatus("wait").done(function(active){
             redisModel.getJobsInList(active).done(function(keys){
-                redisModel.formatKeys(keys).done(function(keyList){
-                    redisModel.getStatusCounts().done(function(countObject){
-                        var model = { keys: keyList, counts: countObject, pending: true, type: "Pending" };
-                        dfd.resolve(model);
-                    });
+                redisModel.formatKeys(keys).done(function(formattedKeys){
+                  redisModel.getProgressForKeys(formattedKeys).done(function(keyList){
+                      redisModel.getStatusCounts().done(function(countObject){
+                          var model = { keys: keyList, counts: countObject, complete: true, type: "Pending" };
+                          dfd.resolve(model);
+                      });
+                  });
                 });
             });
         });

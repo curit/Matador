@@ -16,7 +16,7 @@ module.exports = function (app) {
                         redisModel.getStatusCounts().done(function(countObject){
                             var model = { keys: keyList, counts: countObject, complete: true, type: "Complete" };
                             dfd.resolve(model);
-		        });
+                        });
                     });
                 });
             });
